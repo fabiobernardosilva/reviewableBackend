@@ -1,6 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
 import { Review } from "./review";
 
+//testing
 @Entity()
 export class School {
 
