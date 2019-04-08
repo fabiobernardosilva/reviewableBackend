@@ -1,30 +1,40 @@
 // REVIEW SERVICES
 
+
 // Public
 // POST
 // Create review
 async function createReview(
-    reviewerName: string,
+    reviewerName: string, //this is the reviewer name
     email: string,
     dOB: string,
-    recommendation: boolean,
-    teacher: string,
-    facilities: string,
-    staff: string,
+    recommendation: number,
+    teacher: number,
+    facilities: number,
+    staff: number,
     comment: string,
-    schoolSchoolId: number
+    schoolSchoolId: number,
+    verificationStatus: number,
+    postStatus: number
 ) {
 
     const data = {
+        // Identification info
         reviewerName: reviewerName,
         email: email,
         dOB: dOB,
+        
+        // Review info
         recommendation: recommendation,
         teacher: teacher,
         facilities: facilities,
         staff: staff,
         comment: comment,
-        schoolSchoolId: schoolSchoolId
+        schoolSchoolId: schoolSchoolId,
+
+        //other
+        verificationStatus: verificationStatus,
+        postStatus: postStatus
     };
 
     const response = await fetch("/reviews",

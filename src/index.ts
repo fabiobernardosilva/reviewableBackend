@@ -4,9 +4,9 @@ import {createApp} from './app';
     const app = await createApp();
 
     // Define port number and callback function
-    const port = 3000;
+    const port = 8080;
     const ready = () => {
-        console.log(`reviewable is running on port ${port}!`);
+        console.log(`reviewableBackend is running on port ${port}!`);
     }
 
     // Start the server

@@ -8,6 +8,9 @@ export class Review {
 @PrimaryGeneratedColumn()
 public reviewId!: number;
 
+@Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
+public time!: string;
+
 @Column()
 public reviewerName!: string;
 
@@ -22,20 +25,37 @@ public dOB!: string;
 public school!: string;
 */
 
+// This is a boolean -1, 0 and 1 values
 @Column()
-public recommendation!: boolean;
+public recommendation!: number;
 
+// Will receive 1 to 5 values
 @Column()
-public teacher!: string;
+public teacher!: number;
 
+// Will receive 1 to 5 values
 @Column()
-public facilities!: string;
+public facilities!: number;
 
+// Will receive 1 to 5 values
 @Column()
-public staff!: string;
+public staff!: number;
 
+// Optional field, with ? decorator
 @Column()
-public comment!: string // CHECK
+public comment?: string;
+
+// This is a boolean -1, 0 and 1 values
+@Column()
+public verificationStatus!: number;
+
+// This is a boolean -1, 0 and 1 values
+@Column({ nullable: true })
+public postStatus!: number;
+
+// Optional field
+@Column({ nullable: true })
+public schoolResponseToComment?: string;
 
 @ManyToOne(type => School, school => school.reviews)
 school!: School;

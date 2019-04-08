@@ -37,6 +37,8 @@ export function getReviewController() {
                 newReview.facilities = req.body.facilities;
                 newReview.staff = req.body.staff;
                 newReview.teacher = req.body.teacher;
+                newReview.verificationStatus = req.body.verificationStatus;
+                newReview.postStatus = req.body.postStatus;
 
                 const review = await reviewRepository.save(newReview);
                 res.json(review);
