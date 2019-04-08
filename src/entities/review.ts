@@ -8,7 +8,7 @@ export class Review {
 @PrimaryGeneratedColumn()
 public reviewId!: number;
 
-@Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
+@Column({ type: 'timestamp', default: () => 'CURRENT_DATE'})
 public time!: string;
 
 @Column()
