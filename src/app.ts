@@ -17,7 +17,7 @@ export async function createApp() {
     app.use(bodyParser.urlencoded({extended: true}));
 
     // Declare the main path
-    app.get('/', (req, res) => {
+    app.get('/api/v1/', (req, res) => {
         res.send('Hello world, welcome to reviewable!');
     });
 
