@@ -1,40 +1,42 @@
 import express from "express"
 import { getSchoolRepository } from "../repositories/school_repository";
-import { Repository } from "typeorm";
-import { School } from "../entities/school";
-//import * as joi from "joi";
 
-
+/** 
+ * This function gets the School repository and creates an Express Router.
+ * This router then, uses HTTP methods, such as GET and POST to retrieve or save schools.
+ * Each internal operation makes use of HTTP requests and responses to perform those actions,
+ * with responses being formatted as JSON. Finally, this function then, returns the router.
+ */
 export function getSchoolController() {
     const schoolRepository = getSchoolRepository();
 
     const router = express.Router();
 
-    // RETURN ALL SCHOOLS
+    // Returns all schools
     router.get("/", (req, res) => {
         (async () => {
-          const schools = await schoolRepository.find();
-          res.json(schools);
+            const schools = await schoolRepository.find();
+            res.json(schools);
         })();
-    });  
+    });
 
-    // RETURN SCHOOL BY ID
+    // Returns school by Id
     router.get("/:schoolId", (req, res) => {
-        
+
         (async () => {
             const schoolIdString = req.params.schoolId as string;
             const schoolIdNumber = parseInt(schoolIdString);
             if (isNaN(schoolIdNumber)) {
                 res.status(400).send("School ID must be a number!")
             } else {
-                const school = await schoolRepository.findOne(schoolIdNumber, {relations: ["reviews"]});
+                const school = await schoolRepository.findOne(schoolIdNumber, { relations: ["reviews"] });
                 res.json(school);
             }
         })();
 
     });
 
-    // THIS WON'T BE AVAILABLE
+    // Creates a new school
     router.post("/", (req, res) => {
         (async () => {
             const newSchool = req.body;
@@ -47,6 +49,7 @@ export function getSchoolController() {
         })();
     });
 
+    // Fully edits / update a school by Id
     router.put("/:schoolId", (req, res) => {
         (async () => {
             const schoolId = req.params.schoolId;
@@ -63,7 +66,7 @@ export function getSchoolController() {
         })();
     });
 
-    // DELETE
+    // Deletes a school by Id
     router.delete("/:schoolId", (req, res) => {
         (async () => {
             const schoolIdString = req.params.schoolId as string;
@@ -72,7 +75,7 @@ export function getSchoolController() {
         })();
     });
 
-    // PATCH
+    // Patches / partially edits a school by Id
     router.patch("/:schoolId", (req, res) => {
         (async () => {
             const schoolId = req.params.schoolId;
@@ -92,53 +95,3 @@ export function getSchoolController() {
 
     return router;
 }
-
-/*
-export function getHandlers(schoolRepository: Repository<School>){
-    
-    const getAllSchools = (req: express.Request, res: express.Response) => {
-        (async() => {
-            try {
-                const schools = await schoolRepository.find();
-                res.json(schools).send();
-
-            } catch(err) {
-                console.error(err);
-                res.status(500).json({error: "Internal server error"}).send();
-            }
-        })();
-    };
-
-    const getSchoolById = (req: express.Request, res: express.Response) => {
-        (async() => {
-            try {
-                const schoolIdString = req.params.schoolId as string;
-                const schoolId = parseInt(schoolIdString);
-
-                if(isNaN(schoolId)){
-                    res.status(400).send("School Id must be a number")
-                } else {
-                    const school = await schoolRepository.createQueryBuilder("school")
-                                                         .leftJoinAndSelect("school.reviews", "review")
-                                                         .where("school.schoolId = :id", {id: schoolId}).getOne();
-                    if (school === undefined) {
-                        res.status(404).json({error: "Not found"}).send();
-                    } else {
-                        res.json(school).send();
-                    }
-                }
-            } catch(err){
-                console.log(err);
-                res.status(500).json({error: "Internal server error"}).send();
-            }
-        })();
-    };
-
-
-
-    return {
-        getAllSchools,
-        getSchoolById
-    };
-}
-*/

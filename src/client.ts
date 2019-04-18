@@ -23,7 +23,7 @@ async function createReview(
         reviewerName: reviewerName,
         email: email,
         dOB: dOB,
-        
+
         // Review info
         recommendation: recommendation,
         teacher: teacher,
@@ -54,7 +54,7 @@ async function createReview(
 // Not used in this version of the project // Private (admin / system)
 // GET
 // Retrieve all reviews
-async function getAllReviews(){
+async function getAllReviews() {
     const response = await fetch("/reviews");
     const json = await response.json();
     return json;
@@ -72,7 +72,7 @@ async function getReviewById(id: number) {
 // Private (admin / system)
 // DELETE
 // Delete review by Id
-async function deleteReviewById(id: number){
+async function deleteReviewById(id: number) {
     const response = await fetch(
         `/reviews/${id}`,
         {
@@ -91,7 +91,7 @@ async function deleteReviewById(id: number){
 // Private (admin / system)
 // POST
 // Create school
-async function createSchool(schoolName: string, website: string){
+async function createSchool(schoolName: string, website: string) {
 
     const data = {
         schoolName: schoolName,
@@ -99,12 +99,12 @@ async function createSchool(schoolName: string, website: string){
     };
 
     const response = await fetch("/schools",
-    {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        }
-    });
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
 
     const json = await response.json();
     return json;
@@ -113,7 +113,7 @@ async function createSchool(schoolName: string, website: string){
 // Public
 // GET
 // Retrieve all schools
-async function getAllSchools(){
+async function getAllSchools() {
     const response = await fetch("/schools");
     const json = await response.json();
     return json;
@@ -122,7 +122,7 @@ async function getAllSchools(){
 // Public
 // GET
 // Retrieve school by Id
-async function getSchoolById(id: number){
+async function getSchoolById(id: number) {
     const response = await fetch(`/schools/${id}`);
     const json = response.json();
     return json;
@@ -133,13 +133,13 @@ async function getSchoolById(id: number){
 // Delete school by Id
 async function deleteSchoolById(id: number) {
     const response = await fetch(`/schools/${id}`,
-    {
-        method: "DELETE",
-        headers: {
-            "Content-Type": "application/json"
-        }
+        {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
 
-    });
+        });
     const json = response.json();
     return json;
 };
