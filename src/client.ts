@@ -128,6 +128,8 @@ async function getSchoolById(id: number) {
     return json;
 };
 
+
+
 // private (admin / system)
 // DELETE
 // Delete school by Id

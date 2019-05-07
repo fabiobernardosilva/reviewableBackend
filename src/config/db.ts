@@ -1,6 +1,7 @@
 import { createConnection } from "typeorm";
 import { Review } from "../entities/review";
 import { School } from "../entities/school";
+import { User } from "../entities/user";
 
 /** 
  * This async function instantiates local variables from the environment variables,
@@ -32,7 +33,8 @@ export async function createDbConnection() {
             database: DATABASE_DB,
             entities: [
                 Review,
-                School
+                School,
+                User
             ],
             synchronize: true
         });

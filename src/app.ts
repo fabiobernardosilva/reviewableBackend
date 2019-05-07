@@ -3,6 +3,8 @@ import bodyParser from 'body-parser'
 import { createDbConnection } from './config/db';
 import { getSchoolController } from './controllers/school_controller';
 import { getReviewController } from './controllers/review_controller';
+import { getAuthController } from './controllers/auth_controller';
+import { getUserController } from './controllers/user_controller';
 
 /**
  * This async function calls for the creating of the Database Connection,
@@ -30,8 +32,13 @@ export async function createApp() {
     // Declare controllers
     const schoolsController = getSchoolController();
     const reviewsController = getReviewController();
-    app.use("/reviews", reviewsController);
-    app.use("/schools", schoolsController);
+    const authController = getAuthController();
+    const userController = getUserController();
+
+    app.use("/api/v1/auth", authController);
+    app.use("/api/v1/reviews", reviewsController);
+    app.use("/api/v1/schools", schoolsController);
+    app.use("/api/v1/users", userController);
 
     return app;
 }
